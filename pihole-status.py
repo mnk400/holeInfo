@@ -27,10 +27,10 @@ def check_status():
 
 def get_summary():
     response = request(summary_today)
-    print(f'{Fore.CYAN}Domains being blocked: {Fore.WHITE}' + response['domains_being_blocked'])
-    print(f'{Fore.CYAN}Total Queries today: {Fore.WHITE}' + response['dns_queries_today'])
-    print(f'{Fore.CYAN}Ads blocked today: {Fore.WHITE}' + response['ads_blocked_today'])
-    print(f'{Fore.CYAN}Percentage Queries Blocked {Fore.WHITE}' + response['ads_percentage_today'])
+    print(Fore.CYAN+'Domains being blocked:' + Fore.WHITE+response['domains_being_blocked'])
+    print(Fore.CYAN+'Total Queries today: ' + Fore.WHITE+response['dns_queries_today'])
+    print(Fore.CYAN+'Ads blocked today: ' + Fore.WHITE+response['ads_blocked_today'])
+    print(Fore.CYAN+'Percentage Queries Blocked ' + Fore.WHITE+response['ads_percentage_today'])
 
 
 status = check_status()
@@ -39,13 +39,13 @@ if status == 'enabled':
     while True:
         print(chr(27) + "[2J")
         os.system('cls' if os.name == 'nt' else 'clear')
-        print(f'\n{Fore.RED}    ____  _  {Fore.GREEN}     __  __      __ ')  
-        print(f' {Fore.RED}  / __ \(_)   {Fore.GREEN}  / / / /___  / /__ ')
-        print(f'{Fore.RED}  / /_/ / /{Fore.WHITE}_____{Fore.GREEN}/ /_/ / __ \/ / _ \ ')
-        print(f'{Fore.RED} / ____/ /{Fore.WHITE}_____{Fore.GREEN}/ __  / /_/ / /  __/ ')
-        print(f'{Fore.RED}/_/   /_/    {Fore.GREEN} /_/ /_/\____/_/\___/ ')
-        print(f'\n{Fore.WHITE}Service: {Fore.GREEN}Active')
-        print(f'{Fore.WHITE}----------------------------------')
+        print(Fore.RED+'\n    ____  _  ' + Fore.GREEN+'     __  __      __ ') 
+        print(Fore.RED+'   / __ \(_)   ' + Fore.GREEN+'  / / / /___  / /__ ')
+        print(Fore.RED+'  / /_/ / /' + Fore.WHITE+'_____' + Fore.GREEN+'/ /_/ / __ \/ / _ \ ')
+        print(Fore.RED+' / ____/ /' + Fore.WHITE+'_____' + Fore.GREEN+'/ __  / /_/ / /  __/ ')
+        print(Fore.RED+'/_/   /_/    ' + Fore.GREEN+' /_/ /_/\____/_/\___/ ')
+        print(Fore.WHITE+'\nService: ' + Fore.GREEN+'Active')
+        print(Fore.WHITE+'----------------------------------')
         get_summary()
         time.sleep(60)
 else:
