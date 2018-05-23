@@ -6,9 +6,7 @@ from colorama import Fore
 
 url = "http://pi.hole/admin"
 
-password = ""
-
-status_check = "%s/api.php?status&auth=%s" % (url, password)
+status_check = "%s/api.php?status" % url
 
 summary_today = "%s/api.php?summary" % url
 
@@ -39,6 +37,7 @@ status = check_status()
 
 if status == 'enabled':
     while True:
+        print(chr(27) + "[2J")
         os.system('cls' if os.name == 'nt' else 'clear')
         print(f'\n{Fore.RED}    ____  _  {Fore.GREEN}     __  __      __ ')  
         print(f' {Fore.RED}  / __ \(_)   {Fore.GREEN}  / / / /___  / /__ ')
