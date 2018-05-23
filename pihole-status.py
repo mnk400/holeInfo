@@ -1,11 +1,12 @@
 import json
 import time
+import os
 from urllib.request import urlopen
 from colorama import Fore
 
 url = "http://pi.hole/admin"
 
-password = "f8e70093b605c8fcec1534a5e3da88e2c5e028fe60eec09bd12c9c33d5be4c04"
+password = ""
 
 status_check = "%s/api.php?status&auth=%s" % (url, password)
 
@@ -38,7 +39,7 @@ status = check_status()
 
 if status == 'enabled':
     while True:
-        print(chr(27) + "[2J")
+        os.system('cls' if os.name == 'nt' else 'clear')
         print(f'\n{Fore.RED}    ____  _  {Fore.GREEN}     __  __      __ ')  
         print(f' {Fore.RED}  / __ \(_)   {Fore.GREEN}  / / / /___  / /__ ')
         print(f'{Fore.RED}  / /_/ / /{Fore.WHITE}_____{Fore.GREEN}/ /_/ / __ \/ / _ \ ')
@@ -47,6 +48,6 @@ if status == 'enabled':
         print(f'\n{Fore.WHITE}Service: {Fore.GREEN}Active')
         print(f'{Fore.WHITE}----------------------------------')
         get_summary()
-        time.sleep(20)
+        time.sleep(60)
 else:
     print("Pi-Hole{Fore.RED} not active.")
