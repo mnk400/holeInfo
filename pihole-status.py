@@ -30,7 +30,7 @@ def get_summary():
     print(Fore.CYAN+'Domains being blocked:' + Fore.WHITE+response['domains_being_blocked'])
     print(Fore.CYAN+'Total Queries today: ' + Fore.WHITE+response['dns_queries_today'])
     print(Fore.CYAN+'Ads blocked today: ' + Fore.WHITE+response['ads_blocked_today'])
-    print(Fore.CYAN+'Percentage Queries Blocked ' + Fore.WHITE+response['ads_percentage_today'])
+    print(Fore.CYAN+'Percentage Queries Blocked: ' + Fore.WHITE+response['ads_percentage_today'])
 
 
 status = check_status()
