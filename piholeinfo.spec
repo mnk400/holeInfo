@@ -3,7 +3,7 @@
 block_cipher = None
 
 
-a = Analysis(['pihole-info.py'],
+a = Analysis(['piholeinfo.py'],
              pathex=['/Users/mnk/Projects/holeinfo'],
              binaries=[],
              datas=[],
@@ -21,7 +21,7 @@ exe = EXE(pyz,
           a.scripts,
           [],
           exclude_binaries=True,
-          name='pihole-info',
+          name='piholeinfo',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
@@ -34,4 +34,4 @@ coll = COLLECT(exe,
                strip=False,
                upx=True,
                upx_exclude=[],
-               name='pihole-info')
+               name='piholeinfo')
