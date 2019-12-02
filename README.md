@@ -6,7 +6,7 @@ Simple script to print information from your pi-hole on your terminal without ne
 ```sh
 $ git clone https://github.com/mnk400/pihole-info
 $ cd pihole-info
-$ python3 pihole-info.py
+$ python3 piholeinfo.py
 ```
 /dist/pihole-info also contains a binary compatible with MacOS.
 
