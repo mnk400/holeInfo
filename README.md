@@ -8,6 +8,6 @@ $ git clone https://github.com/mnk400/pihole-info
 $ cd pihole-info
 $ python3 piholeinfo.py
 ```
-/dist/pihole-info also contains a binary compatible with MacOS.
+/dist/piholeinfo also contains a binary compatible with MacOS.
 
 
