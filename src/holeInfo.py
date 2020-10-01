@@ -94,6 +94,7 @@ class holeInfo(object):
                 time.sleep(30)
         except KeyboardInterrupt as e:
             print("Keyboard Interrupt. Quitting.")
+            curses.endwin()
             exit()
     
 if __name__ == "__main__":
