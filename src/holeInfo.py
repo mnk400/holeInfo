@@ -2,6 +2,7 @@
 import json
 import time
 import curses
+import sys
 from urllib.error import URLError
 from urllib.request import urlopen
 
@@ -54,6 +55,10 @@ class holeInfo(object):
         self.summaryScreen.addstr(response['ads_percentage_today'] + "\n")
         self.summaryScreen.addstr('Unique Domains:               ',curses.color_pair(curses.COLOR_CYAN,))
         self.summaryScreen.addstr(response['unique_domains'] + "\n")
+        self.summaryScreen.addstr('Queries Cached:               ',curses.color_pair(curses.COLOR_CYAN,))
+        self.summaryScreen.addstr(response['queries_cached'] + "\n")
+        self.summaryScreen.addstr('Queries Forwarded:            ',curses.color_pair(curses.COLOR_CYAN,))
+        self.summaryScreen.addstr(response['queries_forwarded'] + "\n")
         self.summaryScreen.refresh()
         
 
@@ -86,12 +91,12 @@ class holeInfo(object):
                 self.summaryScreen.addstr("\nERROR:piHole not reachable \n",curses.color_pair(curses.COLOR_RED,))
         self.summaryScreen.refresh()
 
-    def main(self):
+    def main(self, sleep_interval):
         try:
             while True:
                 self.summaryScreen.clear()
                 self.showBanner()
-                time.sleep(30)
+                time.sleep(sleep_interval)
         except KeyboardInterrupt as e:
             print("Keyboard Interrupt. Quitting.")
             curses.endwin()
@@ -99,4 +104,7 @@ class holeInfo(object):
     
 if __name__ == "__main__":
     info = holeInfo()
-    info.main()
+    if len(sys.argv) > 1 and sys.argv[1] == "-s":
+        info.main(sleep_interval=int(sys.argv[2]))
+    else:
+        info.main(sleep_interval=30)
