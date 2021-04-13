@@ -14,7 +14,7 @@ $ cd holeinfo
 $ make install
 ```
 
-Usagae:
+Usage:
 
 ```
 $ holeinfo
