@@ -1,21 +1,24 @@
 ## Pi-Hole Status
 
-Simple script written uses curses to print information from your pi-hole on your terminal without needing to SSH into your pi or havin to open the web interface. Script refreshes once every 30 seconds, should work on linux and macOS.
-
+Command-line utility to display pi-hole statistics in your terminal without having to login or setting up any additional confirmation. 
 ![](img/terminal-screenshot.png)
 
-Installation instructions:
+Script updates every 30 seconds by default, `-s` can be specified to change the update
+timer like `holeinfo -s 5`.
 
-Make sure you have python3 installed
-```sh
+Can be install using pip using:
+```
+pip3 install holeinfo
+```
 
-$ git clone https://github.com/mnk400/holeinfo
-$ cd holeinfo
-$ make install
+Installing from source:
+```
+git clone https://github.com/mnk400/holeinfo
+cd holeinfo
+python3 build.py install
 ```
 
 Usage:
-
 ```
 $ holeinfo
 ```
