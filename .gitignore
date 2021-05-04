@@ -1,1 +1,6 @@
 .DS_Store
+.vscode
+build
+dist
+holeinfo.egg-info
+holeinfo/__pycache__
