@@ -1,15 +1,22 @@
 import json
 import time
-import curses
 import argparse
 from urllib.error import URLError
 from urllib.request import urlopen
+try:
+    import curses
+except ImportError as e:
+    import platform
+    if platform.system() == "Windows":
+        print("Curses not installed on windows system,\nRun `pip install windows-curses`.")
+        exit(1)
+
 
 
 class holeInfo(object):
 
-    def __init__(self):
-        self.url = "http://pi.hole/admin"
+    def __init__(self, ip: str):
+        self.url = "http://%s/admin" % ip
         self.status_check = "%s/api.php?status" % self.url
         self.summary_today = "%s/api.php?summary" % self.url
         self.summaryScreen = curses.initscr()
@@ -115,7 +122,8 @@ class holeInfo(object):
                                       curses.color_pair(curses.COLOR_RED,))
             self.getSummary()
         elif status is False:
-            self.summaryScreen.addstr("\nERROR:piHole not reachable \n",
+            self.summaryScreen.addstr("\nERROR:piHole not reachable at %s\n" %
+                                      self.url,
                                       curses.color_pair(curses.COLOR_RED,))
         self.summaryScreen.refresh()
 
@@ -142,6 +150,8 @@ def main():
                                      'statistics in your terminal.')
     parser.add_argument('-s', type=int, default=30, dest='sleep_interval',
                         help="Sleep timer between refreshes(in seconds)")
+    parser.add_argument('-ip', type=str, default="pi.hole", dest='ip',
+                        help="Custon URL or IP for your piHole if pi.hole isn't configured on your piHole.")
     args = parser.parse_args()
-    info = holeInfo()
+    info = holeInfo(args.ip)
     info.main(sleep_interval=args.sleep_interval)
