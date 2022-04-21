@@ -35,4 +35,4 @@ jobs:
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
-        repository_url: https://pypi.org/project/holeinfo/
+        repository_url: https://upload.pypi.org/legacy/
