@@ -275,14 +275,14 @@ def main():
         help="Time between refreshes(in seconds)",
     )
     parser.add_argument(
-        "-api",
+        "--api",
         type=str,
         default=None,
         dest="api_key",
         help="API key for pi.hole"
     )
     parser.add_argument(
-        "-ip",
+        "--ip",
         type=str,
         default="pi.hole",
         dest="ip",
