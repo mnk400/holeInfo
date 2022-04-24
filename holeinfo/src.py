@@ -21,7 +21,8 @@ except ImportError:
 
 class holeInfo(object):
 
-    def __init__(self, ip: str, api_key: str, update_interval: int):
+    def __init__(self, ip: str, api_key: str = None, update_interval: int = 30):
+        self.api_key = api_key
         self.update_interval = update_interval
         self.url = "http://%s/admin" % ip
         self.status_check = "%s/api.php?status" % self.url
@@ -117,6 +118,8 @@ class holeInfo(object):
 
     def getDomains(self, url, title, dict_key, limit=3):
         response = self.request(url)
+        if not response:
+            response = {dict_key: {"Error Loading Data": -1}}
         title_str = title + ":" + " "*(29-len(title))
         self.summaryScreen.addstr(
             title_str,
@@ -124,7 +127,6 @@ class holeInfo(object):
                 curses.COLOR_CYAN,
             ),
         )
-
         self.summaryScreen.addstr(list(response[dict_key].keys())[0] + "\n")
         for i in range(1, min(limit, len(response[dict_key]))):
             self.summaryScreen.addstr(
@@ -194,8 +196,9 @@ class holeInfo(object):
                 ),
             )
             self.getSummary()
-            self.getDomains(self.top_domains, "Top Blocked Domains", "top_ads")
-            self.getDomains(self.query_sources, "Top Devices", "top_sources")
+            if self.api_key:
+                self.getDomains(self.top_domains, "Top Blocked Domains", "top_ads")
+                self.getDomains(self.query_sources, "Top Devices", "top_sources")
         elif status == "disabled":
             self.summaryScreen.addstr("Service: ")
             self.summaryScreen.addstr(
@@ -214,28 +217,38 @@ class holeInfo(object):
         self.summaryScreen.refresh()
 
     def enable(self):
+        if not self.api_key:
+            print("API key needed to enable Pi-Hole")
+            exit(1)
         if self.checkStatus() == "disabled":
             response = self.request(self.enable_pi)
             if response and response["status"] == "enabled":
                 print("PiHole enabled")
             else:
                 print("Error enabling piHole")
+                exit(1)
         elif self.checkStatus() == "enabled":
             print("PiHole already enabled")
         else:
             print("Error reading PiHole at %s" % self.url)
+            exit(1)
 
     def disable(self):
+        if not self.api_key:
+            print("API key needed to enable Pi-Hole")
+            exit(1)
         if self.checkStatus() == "enabled":
             response = self.request(self.disable_pi)
             if response and response["status"] == "disabled":
                 print("PiHole disabled")
             else:
                 print("Error disabling piHole")
+                exit(1)
         elif self.checkStatus() == "disabled":
             print("PiHole already disabled")
         else:
             print("Error reading PiHole at %s" % self.url)
+            exit(1)
 
     def main(self):
         self.summaryScreen = curses.initscr()
@@ -259,7 +272,7 @@ class holeInfo(object):
         except Exception as e:
             curses.endwin()
             print(e)
-            exit()
+            exit(1)
 
 
 def main():
@@ -312,3 +325,5 @@ def main():
         info.disable()
     else:
         info.main()
+
+main()
