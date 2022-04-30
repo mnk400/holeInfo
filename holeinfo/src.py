@@ -281,7 +281,7 @@ def main():
         description="Display pi.hole statistics in your terminal."
     )
     parser.add_argument(
-        "-s",
+        "--s",
         type=int,
         default=30,
         dest="update_interval",

@@ -8,7 +8,7 @@ long_description = 'Commandline tool to display pi-hole statistics to be' + \
 
 setup(
         name='holeinfo',
-        version='2.0',
+        version='2.0.1',
         author='Manik',
         author_email='me@manik.cc',
         url='https://github.com/mnk400/holeinfo',
