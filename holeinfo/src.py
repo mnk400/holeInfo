@@ -235,7 +235,7 @@ class holeInfo(object):
 
     def disable(self):
         if not self.api_key:
-            print("API key needed to enable Pi-Hole")
+            print("API key needed to disable Pi-Hole")
             exit(1)
         if self.checkStatus() == "enabled":
             response = self.request(self.disable_pi)
